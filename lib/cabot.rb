@@ -1,10 +1,10 @@
-class Columbus
+class Cabot
 
   # GET
   module Index
     def self.call(model, current_user = {})
       object = model.capitalize.constantize
-      params = Columbus::Parameters::Create.send(model)
+      params = Cabot::Parameters::Create.send(model)
 
       object::Index.(params: params, current_user: current_user)
     end
@@ -14,7 +14,7 @@ class Columbus
   module Show
     def self.call(model, current_user = {})
       object = model.to_s.capitalize.constantize
-      params = Columbus::Parameters::Show.send(model)
+      params = Cabot::Parameters::Show.send(model)
 
       object::Show.(params: params, current_user: current_user)
     end
@@ -24,7 +24,7 @@ class Columbus
   module Create
     def self.call(model, current_user = {})
       object = model.to_s.capitalize.constantize
-      params = Columbus::Parameters::Create.send(model)
+      params = Cabot::Parameters::Create.send(model)
 
       object::Create.(params: params, current_user: current_user)
     end
@@ -34,7 +34,8 @@ class Columbus
   module Update
     def self.call(model, current_user = {})
       object = model.capitalize.constantize
-      params = Columbus::Parameters::Update.send(model)
+      params = Cabot::Parameters::Update.send(model)
+
       object::Update.(params: params, current_user: current_user)
     end
   end
