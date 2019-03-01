@@ -3,7 +3,7 @@ class Cabot
   # GET
   module Index
     def self.call(model, current_user = {})
-      object = model.capitalize.constantize
+      object = model.to_s.capitalize.constantize
       params = Cabot::Parameters::Create.send(model)
 
       object::Index.(params: params, current_user: current_user)
@@ -33,7 +33,7 @@ class Cabot
   # PUT
   module Update
     def self.call(model, current_user = {})
-      object = model.capitalize.constantize
+      object = model.to_s.capitalize.constantize
       params = Cabot::Parameters::Update.send(model)
 
       object::Update.(params: params, current_user: current_user)
