@@ -7,6 +7,6 @@ Gem::Specification.new do |s|
   s.authors     = ['Alexandre Ovcharov', 'Dmitriy Gladkiy', 'Vitaliy Stepura']
   s.email       = 'thedoctorwhoovesmail@gmail.com'
   s.files       = ['lib/cabot.rb']
-  s.homepage    = 'http://rubygems.org/gems/cabot'
+  s.homepage    = 'http://github.com/sheff3rd/cabot'
   s.license     = 'MIT'
 end
