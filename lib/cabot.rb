@@ -1,12 +1,25 @@
 class Cabot
+  def initialize(result)
+    @result = result
+  end
+
+  def model
+    @model ||= @result[:model]
+  end
+
+  def serializer
+    @serializer ||= @result[:serializer]
+  end
+
 
   # GET
   module Index
     def self.call(model, current_user = {})
-      object = model.to_s.camelize.constantize
-      params = Cabot::Parameters::Create.send(model)
 
-      object::Index.(params: params, current_user: current_user)
+      @object = model.to_s.camelize.constantize
+      @params = Cabot::Parameters::Index.send(model)
+
+      Cabot.new(object::Index.(params: params, current_user: current_user))
     end
   end
 
@@ -16,7 +29,7 @@ class Cabot
       object = model.to_s.camelize.constantize
       params = Cabot::Parameters::Show.send(model)
 
-      object::Show.(params: params, current_user: current_user)
+      Cabot.new(object::Show.(params: params, current_user: current_user))
     end
   end
 
@@ -26,7 +39,7 @@ class Cabot
       object = model.to_s.camelize.constantize
       params = Cabot::Parameters::Create.send(model)
 
-      object::Create.(params: params, current_user: current_user)
+      Cabot.new(object::Create.(params: params, current_user: current_user))
     end
   end
 
@@ -36,7 +49,7 @@ class Cabot
       object = model.to_s.camelize.constantize
       params = Cabot::Parameters::Update.send(model)
 
-      object::Update.(params: params, current_user: current_user)
+      Cabot.new(object::Update.(params: params, current_user: current_user))
     end
   end
 end
