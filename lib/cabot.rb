@@ -1,3 +1,4 @@
+# Cabot gem
 class Cabot
   def initialize(result)
     @result = result
@@ -15,9 +16,8 @@ class Cabot
   # GET
   module Index
     def self.call(model, current_user = {})
-
-      @object = model.to_s.camelize.constantize
-      @params = Cabot::Parameters::Index.send(model)
+      object = model.to_s.camelize.constantize
+      params = Cabot::Parameters::Index.send(model)
 
       Cabot.new(object::Index.(params: params, current_user: current_user))
     end
