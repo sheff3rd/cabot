@@ -4,113 +4,79 @@
 
 [FactoryBot](https://github.com/thoughtbot/factory_bot) alternative for [Trailblazer](https://github.com/trailblazer/trailblazer)
 
-# Installation
+# Getting started
 
-**Add this line to the top of your application's Gemfile:**
+Add following to Gemfile:
 
 ```sh
 $ gem 'cabot'
 ```
 
-**And then run:**
+and run:
 
 ```sh
 $ bundle install
 ```
 
-**In the tests directory, create a new one called ```'cabot'```:**
+# Configuration
+
+Create a new directory to store all defined cabot parameters in `spec/cabot`
 
 ```sh
-'app/spec/cabot'
+spec
+  └── cabot
+      ├── index.rb
+      ├── show.rb
+      ├── create.rb
+      └── update.rb
 ```
 
-**Add ```'cabot'``` directory to your ```'rails_helper.rb'``` file. For example:**
+And then load newly created files
 
-```sh
+```rb
+# rails_helper.rb
+
 Dir[Rails.root.join('spec/cabot/**/*.rb')].each { |f| require f }
 ```
 
-**In this directory, create files called the same as your actions. It should be something like:**
+# Usage
 
-```sh
-app
-└── spec
-    └── cabot
-        ├── index.rb
-        ├── show.rb
-        ├── create.rb
-        └── update.rb
+Cabot is trailblazer alternative for [factory_bot](https://github.com/thoughtbot/factory_bot_rails)
+It's being used to create operation result in the spec
+
+```rb
+  let(:current_user) { Cabot::Create.(:user).model }
+  let(:result) { Cabot::Create.(:comment, current_user: current_user)
+  
+  before do
+    let(:seriailizer) { result.serializer }
+  end 
 ```
 
-**In these files we will set the parameters we need to create the entities.**
+Calling `Cabot::Create.(:user)` will automatically call `User::Create.(params: Cabot::Parameters::Create.send(:account)) with predefined parameters
 
-Let's say you have 2 models: ```User``` that ```has_many: posts```, and ```Post``` that ```belongs_to: user```.
-
-To create the ```User``` model you need ```name``` and ```email``` fields.
-
-And for ```Post``` you need only ```title``` field.
-
-You should have something like:
-
-```sh
-# frozen_string_literal: true
-
-require 'rails_helper'
+```
+# spec/cabot/create.rb
 
 class Cabot
   module Parameters
     module Create
-      class << self
-        def user
-          {
-            name: Faker::Name.name,
-            email: Faker::Internet.email
-          }
-        end
-
-        def post
-          { title: Faker::Lorem.word }
-        end
+      def self.comment
+        {
+          body: '',
+        }
+      
+      def self.user
+        {
+          name: 'John Doe'
+          email: 'john_doe@mail.com'
+        }
       end
     end
   end
 end
 ```
-As you might have noticed, we can use [Faker](https://github.com/stympy/faker/) gem.
-
-# Usage
-
-**In the ```*_spec.rb``` file***
-
-```sh
-...
-RSpec.describe User::Create do
-  describe '#create' do
-    let(:user) { Cabot::Create.(:user).model }
-...
-```
-
-```Cabot``` will use your [Trailblazer](https://github.com/trailblazer/trailblazer) operation
-and on its basis will create an entity that you need for the test.
-
-For creating ```Post``` entity you need to specify the ```current_user```. 
-
-In ```Cabot``` this is the second parameter:
-
-```sh
-...
-RSpec.describe Post::Create do
-  describe '#create' do
-    let(:user) { Cabot::Create.(:user).model }
-    let(:post) { Cabot::Create.(:post, user).model }
-...
-```
-
-**You can also indicate what ```Cabot``` should return**
-
-After brakes you can specify ```.model``` or ```.serializer```. 
-
-This is an alternative [Trailblazer](https://github.com/trailblazer/trailblazer) ```result[:model]``` or ```result[:serializer]```.
+         
 
 # License
 
