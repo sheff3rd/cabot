@@ -1,6 +1,6 @@
 # Cabot
 
-> **Version**: 0.1.0
+> **Version**: 0.1.1
 
 [FactoryBot](https://github.com/thoughtbot/factory_bot) alternative for [Trailblazer](https://github.com/trailblazer/trailblazer)
 
