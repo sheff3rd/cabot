@@ -12,7 +12,6 @@ class Cabot
     @serializer ||= @result[:serializer]
   end
 
-
   # GET
   module Index
     def self.call(model, current_user = {})
