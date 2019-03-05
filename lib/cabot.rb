@@ -1,15 +1,11 @@
 # Cabot gem
 class Cabot
+  attr_accessor :result, :model, :serializer
+
   def initialize(result)
     @result = result
-  end
-
-  def model
-    @model ||= @result[:model]
-  end
-
-  def serializer
-    @serializer ||= @result[:serializer]
+    @model = result[:model]
+    @serializer = result[:serializer]
   end
 
   # GET
