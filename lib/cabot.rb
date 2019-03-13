@@ -10,9 +10,12 @@ class Cabot
 
   # GET
   module Index
-    def self.call(model, current_user = {})
+    def self.call(model, current_user = {}, options = {})
       object = model.to_s.camelize.constantize
       params = Cabot::Parameters::Index.send(model)
+      options.each do |key, value|
+        params[key] = value
+      end
 
       Cabot.new(object::Index.(params: params, current_user: current_user))
     end
@@ -20,9 +23,12 @@ class Cabot
 
   # GET /:id
   module Show
-    def self.call(model, current_user = {})
+    def self.call(model, current_user = {}, options = {})
       object = model.to_s.camelize.constantize
       params = Cabot::Parameters::Show.send(model)
+      options.each do |key, value|
+        params[key] = value
+      end
 
       Cabot.new(object::Show.(params: params, current_user: current_user))
     end
@@ -30,9 +36,12 @@ class Cabot
 
   # POST
   module Create
-    def self.call(model, current_user = {})
+    def self.call(model, current_user = {}, options = {})
       object = model.to_s.camelize.constantize
       params = Cabot::Parameters::Create.send(model)
+      options.each do |key, value|
+        params[key] = value
+      end
 
       Cabot.new(object::Create.(params: params, current_user: current_user))
     end
@@ -40,9 +49,12 @@ class Cabot
 
   # PUT
   module Update
-    def self.call(model, current_user = {})
+    def self.call(model, current_user = {}, options = {})
       object = model.to_s.camelize.constantize
       params = Cabot::Parameters::Update.send(model)
+      options.each do |key, value|
+        params[key] = value
+      end
 
       Cabot.new(object::Update.(params: params, current_user: current_user))
     end
