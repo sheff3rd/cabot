@@ -53,7 +53,7 @@ It's being used to create operation result in the spec
   end 
 ```
 
-Calling `Cabot::Create.(:user)` will automatically call `User::Create.(params: Cabot::Parameters::Create.send(:account)) with predefined parameters
+Calling `Cabot::Create.(:user)` will automatically call `User::Create.(params: Cabot::Parameters::Create.send(:account))` with predefined parameters
 
 ```rb
 # spec/cabot/create.rb
