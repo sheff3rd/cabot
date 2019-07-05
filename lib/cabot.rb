@@ -1,13 +1,8 @@
-# Cabot gem
-class Cabot
-  attr_accessor :result, :model, :serializer
+require_relative 'cabot/configuration'
+require_relative 'cabot/factory'
 
-  def initialize(result)
-    @result = result
-    @model = result[:model]
-    @serializer = result[:serializer]
-  end
-
+# Cabot Gem Definition (CGD)
+module Cabot
   # GET
   module Index
     def self.call(model, current_user = {}, options = {})
@@ -17,7 +12,7 @@ class Cabot
         params[key] = value
       end
 
-      Cabot.new(object::Index.(params, current_user: current_user))
+      Factory.new(object::Index.(params, current_user: current_user))
     end
   end
 
@@ -30,7 +25,7 @@ class Cabot
         params[key] = value
       end
 
-      Cabot.new(object::Show.(params, current_user: current_user))
+      Factory.new(object::Show.(params, current_user: current_user))
     end
   end
 
@@ -43,7 +38,7 @@ class Cabot
         params[key] = value
       end
 
-      Cabot.new(object::Create.(params, current_user: current_user))
+      Factory.new(object::Create.(params, current_user: current_user))
     end
   end
 
@@ -56,7 +51,7 @@ class Cabot
         params[key] = value
       end
 
-      Cabot.new(object::Update.(params, current_user: current_user))
+      Factory.new(object::Update.(params, current_user: current_user))
     end
   end
 end

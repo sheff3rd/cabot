@@ -47,10 +47,10 @@ It's being used to create operation result in the spec
 ```rb
   let(:current_user) { Cabot::Create.(:user).model }
   let(:result) { Cabot::Create.(:comment, current_user: current_user)
-  
+
   before do
     let(:seriailizer) { result.serializer }
-  end 
+  end
 ```
 
 Calling `Cabot::Create.(:user)` will automatically call `User::Create.(params: Cabot::Parameters::Create.send(:account))` with predefined parameters
@@ -58,25 +58,36 @@ Calling `Cabot::Create.(:user)` will automatically call `User::Create.(params: C
 ```rb
 # spec/cabot/create.rb
 
-class Cabot
-  module Parameters
-    module Create
-      def self.comment
-        {
-          body: '',
-        }
-      
-      def self.user
-        {
-          name: 'John Doe'
-          email: 'john_doe@mail.com'
-        }
-      end
+module Cabot::Parameters
+  module Create
+    def self.comment
+      {
+        body: '',
+      }
+    end
+
+    def self.user
+      {
+        name: 'John Doe'
+        email: 'john_doe@mail.com'
+      }
     end
   end
 end
 ```
-         
+
+# Configuration
+
+| Option          | Description                                                                  | Default |
+|-----------------|------------------------------------------------------------------------------|---------|
+| `symbolize_key` | Symbolize key or not when calling `result[:model]` and `result[:serializer]` | true    |
+
+```rb
+# config/initializers/cabot.rb
+Cabot.configure do |config|
+  config.symbolize_keys = false
+end
+```
 
 # License
 
