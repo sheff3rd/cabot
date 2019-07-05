@@ -17,7 +17,7 @@ class Cabot
         params[key] = value
       end
 
-      Cabot.new(object::Index.(params: params, current_user: current_user))
+      Cabot.new(object::Index.(params, current_user: current_user))
     end
   end
 
@@ -30,7 +30,7 @@ class Cabot
         params[key] = value
       end
 
-      Cabot.new(object::Show.(params: params, current_user: current_user))
+      Cabot.new(object::Show.(params, current_user: current_user))
     end
   end
 
@@ -43,7 +43,7 @@ class Cabot
         params[key] = value
       end
 
-      Cabot.new(object::Create.(params: params, current_user: current_user))
+      Cabot.new(object::Create.(params, current_user: current_user))
     end
   end
 
@@ -56,7 +56,7 @@ class Cabot
         params[key] = value
       end
 
-      Cabot.new(object::Update.(params: params, current_user: current_user))
+      Cabot.new(object::Update.(params, current_user: current_user))
     end
   end
 end
