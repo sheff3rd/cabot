@@ -62,13 +62,13 @@ module Cabot::Parameters
   module Create
     def self.comment
       {
-        body: '',
+        body: ''
       }
     end
 
     def self.user
       {
-        name: 'John Doe'
+        name: 'John Doe',
         email: 'john_doe@mail.com'
       }
     end
